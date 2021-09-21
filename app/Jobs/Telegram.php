@@ -2,15 +2,14 @@
 
 namespace App\Jobs;
 
-use danog\MadelineProto\API;
-use danog\MadelineProto\Settings\Database\Mysql;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use function Symfony\Component\String\s;
+
 
 class Telegram implements ShouldQueue
 {
@@ -45,35 +44,27 @@ class Telegram implements ShouldQueue
 //
 //            $message = "yey";
 //
-//            $job = (new Telegram($message, $phone));
+//            $job = (new Telegram($message, $phone));T
 //            dispatch($job);
 
 
         $message = $this->message;
         $number = $this->number;
 
-        $settings['app_info']['api_id']='8045583';
-        $settings['app_info']['api_hash']='8ee4857e5c89147022566f53dc97ff39';
+//                $messages = $telegram->messages->sendMessage([
+//                    'peer' => '@rostefan',
+//                     'message' => "SAlut ce faci?". rand(1, 99999)
+//                ]);
+                $settings['app_info']['api_id']='8045583';
+                $settings['app_info']['api_hash']='8ee4857e5c89147022566f53dc97ff39';
 
 
-        $settings = (new \danog\MadelineProto\Settings\Database\Mysql)
-            ->setUri('tcp://localhost')
-            ->setUsername(env('DB_USERs', 'forge'))
-            ->setPassword(env('DB_PASSWORD', 'forge'))
-            ->setDatabase(env('DB_DATABASEs', 'forge'));
+            $MadelineProto = new \danog\MadelineProto\API('telegram/session.madeline', $settings);
 
-        $telegram = new \danog\MadelineProto\API('madeline', $settings);
-
-        $telegram->async(true);
-
-            $telegram->loop(function () use ($telegram) {
-
-                $messages = $telegram->messages->sendMessage([
-                    'peer' => '@drgutman',
-                     'message' => "SAlut ce faci?". rand(1, 99999)
-                ]);
-
-    });
+        dd($MadelineProto);
+//        $me = $MadelineProto->start();
+$MadelineProto->messages->sendMessage(['peer' => '@rostefan', 'message' => "Hi!\nThanks for creating MadelineProto! <3"]);
+        echo 'OK, done!'.PHP_EOL;
 
 
     }

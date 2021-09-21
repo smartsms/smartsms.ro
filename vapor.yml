@@ -2,6 +2,10 @@ id: 24112
 name: smartsms
 environments:
     production:
+        domain:
+            - smartsms.ro
+            - api.smartsms.ro
+            - smsgateway.ro
         memory: 256
         cli-memory: 256
         queue-memory: 256
@@ -14,7 +18,7 @@ environments:
         deploy:
             - 'php artisan migrate --force'
     staging:
-        memory: 256w
+        memory: 256
         cli-memory: 256
         queue-memory: 256
         domain: s.smartsms.ro
@@ -23,6 +27,6 @@ environments:
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install'
             - 'php artisan event:cache'
-            #- 'npm ci && npm run dev && rm -rf node_modules'
+            - 'npm ci && npm run dev && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'

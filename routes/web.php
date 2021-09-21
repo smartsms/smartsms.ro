@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\AmazonCallbackController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\TelegramController;
+use App\Http\Controllers\TController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,11 +14,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/q', [IndexController::class, 'q']);
+Route::get('/', function () {
+     return view('welcome');
+});
+
+Route::get('/q', [IndsexController::class, 'q']);
 
 Route::get('/test', [TestController::class, 'index']);
 
-Route::any('/telegram', [TelegramController::class, 'index']);
+Route::any('/telegram', [TController::class, 'index']);
+
 
 
 

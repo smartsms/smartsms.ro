@@ -58,11 +58,18 @@ $endpoint = 'https://';
         //$lists = $SnSclient->listSubscriptions([]);
         dd($result, $attrib, $lists);
 
+//
+//                $job = (new Send($message, $phone));
+//                dispatch($job);
+//
+//                return "message sent!";
+//
+//         "metrics": [
+//        [ "AWS/SNS", "SMSSuccessRate", "SMSType", "Transactional", "Country", "RO" ],
+//        [ "...", "RU" ],
+//        [ "...", "Promotional", ".", "." ]
+    //]
 
-                $job = (new Send($message, $phone));
-                dispatch($job);
-
-                return "message sent!";
 
     }
 }
