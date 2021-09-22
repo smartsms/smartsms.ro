@@ -28,9 +28,9 @@ $SnSclient = new SnsClient([
 
 
 
-$phone = "+40726459188";
+$phone = "+40737758618";
 
-$message = "yey";
+$message = "2 milioane de tine de malai.";
 $topic = '';
 
 $protocol = 'https';
@@ -43,8 +43,8 @@ $endpoint = 'https://';
         'AttributeName' => "Policy | DisplayName | DeliveryPolicy",
         'AttributeValue' => 'First Topic',
         'ReturnSubscriptionArn' => true,
-        'SenderID' => 'necenzurat',
-        'TopicArn' => 'arn:aws:sns:eu-central-1:894666503115:2way-sms',
+        'SenderID' => 'ING',
+        //'TopicArn' => 'arn:aws:sns:eu-central-1:894666503115:2way-sms',
     ]);
     $result = $SnSclient->listTopics([
     ]);

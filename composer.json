@@ -44,7 +44,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi",
             "@php artisan telescope:publish --ansi"
         ],
         "post-root-package-install": [
