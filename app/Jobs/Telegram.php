@@ -56,45 +56,43 @@ class Telegram implements ShouldQueue
 //                    'peer' => '@rostefan',
 //                     'message' => "SAlut ce faci?". rand(1, 99999)
 //                ]);
+        $settings = [
+            'app_info' => [
+                    'api_id'   => '8045583',
+                    'api_hash' => '8ee4857e5c89147022566f53dc97ff39',
+            ],
+            'logger' => [
+                    'logger_param' => '/tmp/MadelineProto.log',
+            ]
+         ];
 
-        $sessionFile = 't/session.madeline';
+        $sessionFile = '/tmp/session.madeline';
         if(file_exists( $sessionFile ) ) {
             $telegram = new API($sessionFile);
         } else {
-            $telegram = new API([
-                'app_info' => [
-                    'api_id'   => '8045583',
-                    'api_hash' => '8ee4857e5c89147022566f53dc97ff39',
-                ],
-                'logger' => [
-
-                    'logger_param' => storage_path('MadelineProto.log'),
-
-                ],
-            ]);
+            $telegram = new API($sessionFile, $settings);
         }
-//$telegram->start();
-//dd($telegram->help->getPromoData);
-
-//$inputContacts = [];
-////$inputContacts[0] = ['_' => 'inputPhoneContact', 'client_id' => 0, 'phone' => '+40737758618', 'first_name' => '', 'last_name' => '', ];
-//$inputContacts[1] = ['_' => 'inputPhoneContact', 'client_id' => 0, 'phone' => '++40 (753) 629 469', 'first_name' => '', 'last_name' => '', ];
-////////
-////////
-// $x = $telegram->contacts->importContacts(['contacts' => $inputContacts]);
-////$x = $telegram->contacts->importContacts(['contacts' => $inputContacts]);
-//////
-//dd($x);
 
 
+$inputContacts = [];
+$inputContacts[] = ['_' => 'inputPhoneContact', 'client_id' => 0, 'phone' => '+40726502604', 'first_name' => '', 'last_name' => '', ];
+$inputContacts[] = ['_' => 'inputPhoneContact', 'client_id' => 0, 'phone' => '+40722538897', 'first_name' => '', 'last_name' => '', ];
+$inputContacts[] = ['_' => 'inputPhoneContact', 'client_id' => 0, 'phone' => '+40726459188', 'first_name' => '', 'last_name' => '', ];
 
-       $messageId = $telegram->messages->sendMessage([
-           'id' => rand(1, 9999),
-           'peer' => '@necenzurat',
-           'message' => "Hi!\nThanks for creating MadelineProto! <3"
+$users = $telegram->contacts->importContacts(['contacts' => $inputContacts]);
+    //dd($users);
+foreach($users['users'] as $user) {
+
+//$chatRooms = $telegram->messages->createChat(['users' => [$me['id'], '@drgutman'], 'title' => 'string', ]);
+//dd($chatRooms);
+
+     $messageId = $telegram->messages->sendMessage([
+           'peer' => $user['id'],
+           'message' => "Salut bro!",
        ]);
-        dd($messageId);
+//     dd($messageId);
 
+}
 
     }
 }
