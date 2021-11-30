@@ -22,9 +22,9 @@ Route::get('/q', [IndsexController::class, 'q']);
 
 Route::get('/test', [TestController::class, 'index']);
 
+Route::get('/gv', [TestController::class, 'gv']);
+
 Route::any('/telegram', [TController::class, 'index']);
-
-
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

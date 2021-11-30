@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Lycamobile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Netopia;
+use App\Http\Controllers\API\GlobalVoice;
 use App\Http\Controllers\API\LycaMobie;
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +19,30 @@ use App\Http\Controllers\API\LycaMobie;
 |
 */
 
-Route::group(['prefix' => 'netopia'], function () {
-    Route::any('/callback', [Netopia::class, 'callback'])->name('netopia-callback');
-    Route::any('/webhook', [Netopia::class, 'webhook'])->name('netopia-webhook');
-    Route::any('/lycamobile', [Lycamobile::class, 'index']);
+Route::group(['prefix' => 'providers'], function () {
 
+    Route::group(['prefix' => 'globalvoice'], function () {
+        Route::any('/status', [GlobalVoice::class, 'status']);
+    }); 
+
+
+
+  
+
+});
+
+
+Route::group(['prefix' => 'netopia'], function () {
+        Route::any('/callback', [Netopia::class, 'callback'])->name('netopia-callback');
+        Route::any('/webhook', [Netopia::class, 'webhook'])->name('netopia-webhook');
 });
 
 Route::group(['prefix' => 'amazon'], function () {
     Route::any('/callback', [AmazonCallBack::class, 'index']);
 });
+
+
+
 
 
 
